@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.description = 'A handy class that prompts users of your iPhone or Mac App Store app to rate your application after using it for a while.'
 
   s.source_files = 'iRate/iRate.{h,m}'
-  spec.resource = "iRate/iRate.bundle"
+  s.resource = 'iRate/iRate.bundle'
   s.requires_arc = true
 end
