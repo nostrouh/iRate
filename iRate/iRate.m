@@ -462,11 +462,20 @@ static NSString *const iRateMacAppStoreURLFormat = @"macappstore://itunes.apple.
     }
     
     //check how long we've been using this version
-    else if (([[NSDate date] timeIntervalSinceDate:self.firstUsed] < self.daysUntilPrompt * SECONDS_IN_A_DAY ) && (self.usesCount < self.usesUntilPrompt && self.eventCount < self.eventsUntilPrompt))
+    else if (([[NSDate date] timeIntervalSinceDate:self.firstUsed] < self.daysUntilPrompt * SECONDS_IN_A_DAY ) && (self.eventCount < self.eventsUntilPrompt))
     {
         if (self.verboseLogging)
         {
-            NSLog(@"iRate did not prompt for rating because the app was first used less than %g days ago & the app has only been used %@ times and only %@ events have been logged", self.daysUntilPrompt, @(self.usesCount), @(self.eventCount));
+            NSLog(@"iRate did not prompt for rating because the app was first used less than %g days ago and only %@ events have been logged", self.daysUntilPrompt, @(self.eventCount));
+        }
+        return NO;
+    }
+    
+    else if (self.usesCount < self.usesUntilPrompt)
+    {
+        if (self.verboseLogging)
+        {
+            NSLog(@"iRate did not prompt for rating because uses count %@ less then %@", self.daysUntilPrompt, @(self.usesCount), @(self.usesUntilPrompt));
         }
         return NO;
     }
